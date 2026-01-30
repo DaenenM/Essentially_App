@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_styles %}
+<link rel="stylesheet" href="{% static 'essentially_app/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="session-container">
+    <form method="post" class="form-card">
+        {% csrf_token %}
+
+        <h1 class="form-title">Session Tracker</h1>
+        <p class="form-subtitle" id="current-avg">Current: 0/min</p>
+
+        <!-- Counter -->
+        <div class="form-group">
+            <label class="form-label">Essentially Count</label>
+            <div class="counter-wrapper">
+                <button type="button" onclick="changeCount(-1)" class="counter-btn">−</button>
+        
+                <input id="countInput" name="count" type="number" value="0" class="counter-input" readonly/>
+
+                <button type="button" onclick="changeCount(1)" class="counter-btn">+</button>
+            </div>
+        </div>
+
+        <!-- Time (hidden, saved to DB) -->
+        <input type="hidden" id="timeInput" name="time" value="0">
+        <!-- Stopwatch -->
+        <div class="form-group">
+            <label class="form-label">Session Time</label>
+
+            <div class="stopwatch-display" id="stopwatch">
+                00:00
+            </div>
+
+            <div class="stopwatch-controls">
+                <button type="button" onclick="startTimer()" class="counter-btn">Start</button>
+                <button type="button" onclick="stopTimer()" class="counter-btn">Stop</button>
+                <button type="button" onclick="resetTimer()" class="counter-btn">Reset</button>
+            </div>
+        </div>
+
+        <!-- Class type -->
+        <div class="form-group">
+            <label class="form-label">Class Type</label>
+            <div class="select-wrapper">
+                {{ form.class_type }}
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Save Session
+        </button>
+    </form>
+</div>
+
+<script>
+    let startTime = null;
+    let elapsed = 0;
+    let timerInterval = null;
+
+    function updateDisplay(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        document.getElementById("stopwatch").textContent = 
+            `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+
+        // store ONLY integer minutes in hidden input
+        document.getElementById("timeInput").value = minutes;
+
+    }
+
+    function startTimer() {
+        if (timerInterval) return;
+        startTime = Date.now() - elapsed;
+        timerInterval = setInterval(() => {
+            elapsed = Date.now() - startTime;
+            updateDisplay(elapsed);
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+
+    function resetTimer() {
+        stopTimer();
+        elapsed = 0;
+        updateDisplay(0);
+    }
+
+    // Counter logic
+    function changeCount(amount) {
+        const input = document.getElementById("countInput");
+        let value = parseInt(input.value) || 0;
+        input.value = Math.max(0, value + amount);
+    }
+
+</script>
+
+
+{% endblock %}

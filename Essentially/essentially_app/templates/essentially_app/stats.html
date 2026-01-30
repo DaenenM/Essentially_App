@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_styles %}
+<link rel="stylesheet" href="{% static 'essentially_app/stats.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="stats-container">
+    <div class="stats-card">
+        <div class="stats-header">
+            <h1 class="stats-title">Class Statistics</h1>
+        </div>
+
+        {% if sessions %}
+            <!-- Overall Stats -->
+            <div class="overall-stats">
+                <div class="stat-box">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Sessions</div>
+                        <div class="stat-value">{{ total_sessions }}</div>
+                    </div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Time</div>
+                        <div class="stat-value">{{ total_time }} <span class="stat-unit">min</span></div>
+                    </div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Total Count</div>
+                        <div class="stat-value">{{ total_count }}</div>
+                    </div>
+                </div>
+                
+                <div class="stat-box stat-box-highlight">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Overall Average</div>
+                        <div class="stat-value">{{ overall_average|floatformat:2 }} <span class="stat-unit">/min</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Class Type</th>
+                            <th>Time (min)</th>
+                            <th>Count</th>
+                            <th>Avg/min</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for session in sessions %}
+                        <tr class="table-row">
+                            <td data-label="Date">{{ session.date|date:"M d, Y" }}</td>
+                            <td data-label="Class Type">
+                                <span class="class-badge">{{ session.get_class_type_display }}</span>
+                            </td>
+                            <td data-label="Time">{{ session.time }}</td>
+                            <td data-label="Count">
+                                <span class="count-badge">{{ session.count }}</span>
+                            </td>
+                            <td data-label="Average">
+                                <span class="average-value">{{ session.average|floatformat:2 }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📊</div>
+                <h3 class="empty-title">No sessions yet</h3>
+                <p class="empty-text">Start tracking your classes to see statistics here</p>
+                <a href="/" class="empty-cta">Track Your First Session</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

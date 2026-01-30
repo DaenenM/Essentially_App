@@ -1,0 +1,52 @@
+{% load static %}
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'essentially_app/base.css' %}">
+    {% block css_styles %}{% endblock %}
+    {% block js_scripts %}{% endblock %}
+    <title>
+        {% block title %}Essentially Counter{% endblock %}
+    </title>
+  </head>
+  <body>
+    
+    <header>
+        {% block header %}
+            <nav class="nav-bar">
+                <div class="nav-container">
+                    <a href="/" class="nav-brand">Essentially</a>
+                    <div class="nav-links">
+                        <a href="/" class="nav-link">
+                            <span>Counter</span>
+                        </a>
+                        <a href="/stats" class="nav-link">
+                            <span>Stats</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        {% endblock %}
+    </header>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        {% block footer %}
+            <div class="footer-content">
+                <p class="footer-text">
+                    Essentially Counter made by Daenen Mastronardi
+                </p>
+                <p class="footer-text" style="margin-top: 0.5rem; font-size: 0.75rem;">
+                    &copy; 2026 All rights reserved.
+                </p>
+            </div>
+        {% endblock %}
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* Container */
+.session-container {
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 8vh;
+}
+
+.session-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translate(0, 0) rotate(0deg); 
+    }
+    50% { 
+        transform: translate(-20px, 20px) rotate(10deg); 
+    }
+}
+
+/* Form Card */
+.form-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    animation: slideUp 0.6s ease-out;
+    z-index: 10;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography */
+.form-title {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+}
+
+.form-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    display: block;
+    text-align: center;
+}
+
+/* Counter */
+.counter-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: #f9fafb;
+    padding: 1rem;
+    border-radius: 16px;
+    border: 2px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.counter-wrapper:focus-within {
+    border-color: #667eea;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.counter-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.counter-btn:active {
+    transform: scale(0.95);
+}
+
+.counter-input {
+    width: 80px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    outline: none;
+}
+
+.counter-input::-webkit-outer-spin-button,
+.counter-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.counter-input {
+    -moz-appearance: textfield;
+}
+
+/* Select Dropdown */
+.select-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.select-wrapper select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: #1a1a2e;
+    background: #f9fafb;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    text-align: center;
+}
+
+.select-wrapper select:focus {
+    border-color: #667eea;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* Stopwatch */
+.stopwatch-display {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 1.25rem 1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.stopwatch-display:hover {
+    border-color: #667eea;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.stopwatch-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.stopwatch-controls .counter-btn {
+    width: 100%;
+    height: 44px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-title {
+        font-size: 2rem;
+    }
+    
+    .stopwatch-display {
+        font-size: 2rem;
+        padding: 1rem 0.75rem;
+    }
+    
+    .stopwatch-controls {
+        gap: 0.5rem;
+    }
+    
+    .stopwatch-controls .counter-btn {
+        height: 40px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .session-container {
+        padding: 1rem;
+        padding-top: 6vh;
+    }
+    
+    .form-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-title {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .stopwatch-display {
+        font-size: 1.75rem;
+        padding: 1rem 0.5rem;
+    }
+    
+    .stopwatch-controls .counter-btn {
+        height: 38px;
+        font-size: 0.8rem;
+    }
+}
