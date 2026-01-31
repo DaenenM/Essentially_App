@@ -15,6 +15,8 @@ class ClassSession(models.Model):
 
     @property
     def average(self):
+        if self.time <= 0:
+            return 0
         return self.count / self.time
     
     def __str__(self):
