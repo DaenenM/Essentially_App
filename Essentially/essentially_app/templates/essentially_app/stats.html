@@ -47,6 +47,22 @@
                         <div class="stat-value">{{ overall_average|floatformat:2 }} <span class="stat-unit">/min</span></div>
                     </div>
                 </div>
+
+                <div class="stat-box">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Most in 1 session</div>
+                        <div class="stat-value">{{ total_most }}</div>
+                    </div>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-icon">⬇️</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Least in 1 session</div>
+                        <div class="stat-value">{{ total_least }}</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Table -->

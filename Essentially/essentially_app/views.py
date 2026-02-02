@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import ClassSessionForm
 from .models import ClassSession
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, Max, Min
 
 def home(request):
     if request.method == "POST":
@@ -32,13 +32,16 @@ def stats(request):
         total_sessions=Count("id"),
         total_time=Sum("time"),
         total_count=Sum("count"),
+        max_count=Max("count"),
+        min_count=Min("count")
     )
 
     total_sessions = totals["total_sessions"] or 0
     total_time = totals["total_time"] or 0
     total_count = totals["total_count"] or 0
+    total_most = totals["max_count"] or 0
+    total_least = totals["min_count"] or 0
 
-    # Compute overall average safely
     overall_average = total_count / total_time if total_time > 0 else 0
 
     context = {
@@ -47,6 +50,8 @@ def stats(request):
         "total_time": total_time,
         "total_count": total_count,
         "overall_average": overall_average,
+        "total_most": total_most,
+        "total_least": total_least,
     }
 
     return render(request, "essentially_app/stats.html", context)
